@@ -62,7 +62,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 // Currently, this disables the power LEDs for the controllers
 void keyboard_pre_init_user(void) {
 	// Set our Litaris LED pin as output
-	setPinOutput(24);
+	gpio_set_pin_output(24);
 	// Turn the LED off
-	writePinHigh(24);
+	gpio_write_pin_high(24);
 }
