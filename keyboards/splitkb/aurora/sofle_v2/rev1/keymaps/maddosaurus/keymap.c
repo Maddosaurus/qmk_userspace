@@ -20,6 +20,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 					_______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______, _______, XXXXXXX, KC_HOME, XXXXXXX, KC_END, XXXXXXX, _______,
 									  _______, _______, _______, MO(3),   _______, _______, _______, KC_DEL , _______, _______),
 
+	// FIXME: I do have BOTH, Underglow and Matrix, don't I? https://docs.qmk.fm/ChangeLog/20241124#rgb-keycode-overhaul-23679-24484-24490
 	[3] = LAYOUT(	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 				    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 					XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 					XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 					XXXXXXX, UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, XXXXXXX, 					XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
@@ -27,6 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 									  _______, _______, _______, _______, _______, _______, _______, KC_DEL , _______, _______)
 };
 
+// FIXME: https://docs.qmk.fm/ChangeLog/20250525#deprecation-of-encoder-update-kb-user
 #if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 };
