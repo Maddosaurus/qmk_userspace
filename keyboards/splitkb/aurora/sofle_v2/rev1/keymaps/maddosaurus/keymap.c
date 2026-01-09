@@ -16,14 +16,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[2] = LAYOUT(	_______, _______, _______, _______, _______, _______, 					_______, _______, _______, _______, _______, _______,
 					_______, KC_INS , KC_PSCR, KC_APP , XXXXXXX, XXXXXXX, 					KC_PGUP, C(KC_LEFT), KC_UP, C(KC_RGHT), C(KC_BSPC), KC_BSPC,
-					_______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS, 					KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, KC_BSPC, 
-					_______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______, _______, XXXXXXX, KC_HOME, XXXXXXX, KC_END, XXXXXXX, _______, 
+					_______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS, 					KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, KC_BSPC,
+					_______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______, _______, XXXXXXX, KC_HOME, XXXXXXX, KC_END, XXXXXXX, _______,
 									  _______, _______, _______, MO(3),   _______, _______, _______, KC_DEL , _______, _______),
 
 	[3] = LAYOUT(	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 				    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 					XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 					XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-					XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, 					XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, 
-					XXXXXXX, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+					XXXXXXX, UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, XXXXXXX, 					XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+					XXXXXXX, UG_NEXT, UG_HUED, UG_SATD, UG_VALD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
 									  _______, _______, _______, _______, _______, _______, _______, KC_DEL , _______, _______)
 };
 
@@ -40,17 +40,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     // 1: right encoder
     if (index == 0) {
 		if (clockwise) {
-			tap_code(KC_BTN5); // Mouse Forward 
+			tap_code(MS_BTN5); // Mouse Forward
 		} else {
-			tap_code(KC_BTN4); // Mouse Back
+			tap_code(MS_BTN4); // Mouse Back
 		}
     }
 
 	if (index == 1) {
 		if (clockwise) {
-			tap_code(KC_WH_D); // Mousewheel down
+			tap_code(MS_WHLD); // Mousewheel down
 		} else {
-			tap_code(KC_WH_U); // Mousewheel up
+			tap_code(MS_WHLU); // Mousewheel up
 		}
     }
 

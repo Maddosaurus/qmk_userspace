@@ -1,1 +1,2 @@
 CONVERT_TO=liatris
+MOUSEKEY_ENABLE = yes
