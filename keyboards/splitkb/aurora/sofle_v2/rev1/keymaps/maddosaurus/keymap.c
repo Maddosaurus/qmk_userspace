@@ -28,36 +28,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 									  _______, _______, _______, _______, _______, _______, _______, KC_DEL , _______, _______)
 };
 
-// FIXME: https://docs.qmk.fm/ChangeLog/20250525#deprecation-of-encoder-update-kb-user
-#if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
+// Encoder functionality mapping
+// https://docs.qmk.fm/ChangeLog/20250525#deprecation-of-encoder-update-kb-user
+// https://docs.qmk.fm/features/encoders#encoder-map
+#if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(MS_BTN4, MS_BTN5), ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
+    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
-
-#endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
-
-#ifdef ENCODER_ENABLE
-// Override default settings for the rotary encoders
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    // 0: left encoder
-    // 1: right encoder
-    if (index == 0) {
-		if (clockwise) {
-			tap_code(MS_BTN5); // Mouse Forward
-		} else {
-			tap_code(MS_BTN4); // Mouse Back
-		}
-    }
-
-	if (index == 1) {
-		if (clockwise) {
-			tap_code(MS_WHLD); // Mousewheel down
-		} else {
-			tap_code(MS_WHLU); // Mousewheel up
-		}
-    }
-
-    return false;
-}
 #endif
 
 // Pre init settings for the keyboard.
