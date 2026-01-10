@@ -16,53 +16,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[2] = LAYOUT(	_______, _______, _______, _______, _______, _______, 					_______, _______, _______, _______, _______, _______,
 					_______, KC_INS , KC_PSCR, KC_APP , XXXXXXX, XXXXXXX, 					KC_PGUP, C(KC_LEFT), KC_UP, C(KC_RGHT), C(KC_BSPC), KC_BSPC,
-					_______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS, 					KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, KC_BSPC, 
-					_______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______, _______, XXXXXXX, KC_HOME, XXXXXXX, KC_END, XXXXXXX, _______, 
+					_______, KC_LALT, KC_LCTL, KC_LSFT, XXXXXXX, KC_CAPS, 					KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_DEL, KC_BSPC,
+					_______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX, _______, _______, XXXXXXX, KC_HOME, XXXXXXX, KC_END, XXXXXXX, _______,
 									  _______, _______, _______, MO(3),   _______, _______, _______, KC_DEL , _______, _______),
 
+	// FIXME: I do have BOTH, Underglow and Matrix, don't I? https://docs.qmk.fm/ChangeLog/20241124#rgb-keycode-overhaul-23679-24484-24490
 	[3] = LAYOUT(	XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 				    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
 					XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 					XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-					XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, 					XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX, 
-					XXXXXXX, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
+					XXXXXXX, UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, XXXXXXX, 					XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+					XXXXXXX, UG_NEXT, UG_HUED, UG_SATD, UG_VALD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,
 									  _______, _______, _______, _______, _______, _______, _______, KC_DEL , _______, _______)
 };
 
-#if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
+// Encoder functionality mapping
+// https://docs.qmk.fm/ChangeLog/20250525#deprecation-of-encoder-update-kb-user
+// https://docs.qmk.fm/features/encoders#encoder-map
+#if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(MS_BTN4, MS_BTN5), ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
+    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
-
-#endif // defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE)
-
-#ifdef ENCODER_ENABLE
-// Override default settings for the rotary encoders
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    // 0: left encoder
-    // 1: right encoder
-    if (index == 0) {
-		if (clockwise) {
-			tap_code(KC_BTN5); // Mouse Forward 
-		} else {
-			tap_code(KC_BTN4); // Mouse Back
-		}
-    }
-
-	if (index == 1) {
-		if (clockwise) {
-			tap_code(KC_WH_D); // Mousewheel down
-		} else {
-			tap_code(KC_WH_U); // Mousewheel up
-		}
-    }
-
-    return false;
-}
 #endif
 
 // Pre init settings for the keyboard.
 // Currently, this disables the power LEDs for the controllers
 void keyboard_pre_init_user(void) {
 	// Set our Litaris LED pin as output
-	setPinOutput(24);
+	gpio_set_pin_output(24);
 	// Turn the LED off
-	writePinHigh(24);
+	gpio_write_pin_high(24);
 }
